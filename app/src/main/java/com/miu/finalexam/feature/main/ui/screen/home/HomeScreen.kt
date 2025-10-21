@@ -8,6 +8,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Face
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.ListItem
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -33,8 +34,15 @@ fun HomeScreen(modifier: Modifier = Modifier,
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
     LazyColumn {
+        item {
+            Text(
+                text = "Item Categories",
+                style = MaterialTheme.typography.titleLarge
+            )
+            HorizontalDivider()
+        }
         items(uiState.categories) { category ->
-//            Text(text=it.name)
+
             ListItem(
                 headlineContent = {
                     Text(category.name)
@@ -44,12 +52,6 @@ fun HomeScreen(modifier: Modifier = Modifier,
                         // add ProductList key to backstack
                         navigateToProductList(category)
                     }
-//                trailingContent = {
-//                    Image(
-//                        imageVector = Icons.Default.Face,
-//                        contentDescription = "Face"
-//                    )
-//                }
             )
             HorizontalDivider()
         }

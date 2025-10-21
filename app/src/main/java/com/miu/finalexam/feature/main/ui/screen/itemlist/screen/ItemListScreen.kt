@@ -48,7 +48,11 @@ import com.miu.finalexam.feature.main.ui.screen.itemlist.viewmodel.ItemListViewM
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ItemListScreen(modifier: Modifier = Modifier, category: Category) {
+fun ItemListScreen(
+    modifier: Modifier = Modifier,
+    category: Category,
+    navigateToProductDetail: (Int) -> Unit
+) {
     // we need app context
     val context = LocalContext.current
     val applicationContext = context.applicationContext
@@ -95,7 +99,11 @@ fun ItemListScreen(modifier: Modifier = Modifier, category: Category) {
     ) { innerPadding ->
         LazyColumn(modifier = modifier.padding(innerPadding)) {
             items(itemListUiState.items) {
-                ListItem(
+                ListItem(modifier=modifier
+
+                    .clickable {
+                        navigateToProductDetail(it.id)
+                    },
                     headlineContent = {
                         Text(it.name)
                     },

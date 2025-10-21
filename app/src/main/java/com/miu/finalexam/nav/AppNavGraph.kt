@@ -19,13 +19,10 @@ import androidx.navigation3.runtime.rememberNavBackStack
 import androidx.navigation3.runtime.rememberSavedStateNavEntryDecorator
 import androidx.navigation3.ui.NavDisplay
 import com.miu.finalexam.feature.main.data.Category
-import com.miu.finalexam.feature.main.data.Setting
 import com.miu.finalexam.feature.main.ui.screen.home.HomeScreen
+import com.miu.finalexam.feature.main.ui.screen.itemlist.screen.ItemDetailScreen
 import com.miu.finalexam.feature.main.ui.screen.itemlist.screen.ItemListScreen
-import com.miu.finalexam.feature.main.ui.screen.productdetail.ProductDetailScreen
-import com.miu.finalexam.feature.main.ui.screen.productlist.ProductListScreen
 import com.miu.finalexam.feature.main.ui.screen.setting.SettingsScreen
-import kotlin.text.clear
 
 @Composable
 fun AppNavGraph(modifier: Modifier = Modifier) {
@@ -79,7 +76,7 @@ fun AppNavGraph(modifier: Modifier = Modifier) {
             backStack.add(ProductList(category))
         }
 
-        fun navigateToProductDetail(id: String) {
+        fun navigateToProductDetail(id: Int) {
             backStack.add(ProductDetail(id))
         }
 
@@ -113,16 +110,14 @@ fun AppNavGraph(modifier: Modifier = Modifier) {
 //                    )
                     ItemListScreen(
                         modifier = modifier,
-                        category = category
+                        category = category,
+                        navigateToProductDetail = ::navigateToProductDetail,
                     )
                 }
-//                entry<ProductDetail> { productDetail: ProductDetail ->
-//                    var id: String = productDetail.productId
-//                    ProductDetailScreen(
-//                        id,
-//                        modifier
-//                    )
-//                }
+                entry<ProductDetail> { productDetail: ProductDetail ->
+                    var id: Int = productDetail.productId
+                    ItemDetailScreen(id, modifier)
+                }
                 entry<Settings> {
                     SettingsScreen(modifier)
                 }
