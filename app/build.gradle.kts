@@ -49,6 +49,14 @@ android {
 }
 
 dependencies {
+    //A type-safe HTTP client for Android and Java.
+    implementation("com.squareup.retrofit2:retrofit:3.0.0")
+    //A Retrofit Converter which uses Gson for serialization
+    implementation("com.squareup.retrofit2:converter-gson:3.0.0")
+    //An image loading library for Android and Compose Multiplatform.
+    implementation("io.coil-kt.coil3:coil-compose:3.3.0")
+    implementation("io.coil-kt.coil3:coil-network-okhttp:3.3.0")
+
     implementation("androidx.room:room-runtime:2.8.2")
     implementation("androidx.room:room-ktx:2.8.2")
     ksp("androidx.room:room-compiler:2.8.2")

@@ -13,15 +13,21 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.miu.finalexam.feature.main.data.Category
 import com.miu.finalexam.feature.main.data.ProductRepository
 import com.miu.finalexam.feature.main.data.ProductRepositoryImpl
+import com.miu.finalexam.feature.main.ui.screen.home.retrofit.JokeViewModel
 import com.miu.finalexam.nav.ProductList
+import com.miu.finalexam.retrofit.ApiProvider
+import com.miu.finalexam.retrofit.data.remote.api.JokeApiService
+import com.miu.finalexam.retrofit.data.repository.JokeRepositoryImpl
 
 @Composable
 fun HomeScreen(modifier: Modifier = Modifier,
@@ -30,10 +36,37 @@ fun HomeScreen(modifier: Modifier = Modifier,
     val viewModel: HomeViewModel = viewModel {
         HomeViewModel(ProductRepositoryImpl())
     }
-
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
+    val jokeApiService: JokeApiService = remember {
+        ApiProvider.jokeApiService
+    }
+    val jokeViewModel: JokeViewModel = viewModel {
+        JokeViewModel(
+            JokeRepositoryImpl(jokeApiService)
+        )
+    }
+    // Read uiState from viewmodel
+    val jokeUiState by jokeViewModel.jokeUiState.collectAsStateWithLifecycle()
+
     LazyColumn {
+        item {
+            Text(
+                text = "Today's Joke",
+                style = MaterialTheme.typography.titleLarge
+            )
+            HorizontalDivider()
+        }
+
+        item {
+            Text(
+                text = jokeUiState.joke?.setup + "\n" + jokeUiState.joke?.punchline,
+                style = MaterialTheme.typography.titleLarge,
+                color = Color.Green
+            )
+            HorizontalDivider()
+        }
+
         item {
             Text(
                 text = "Item Categories",
