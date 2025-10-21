@@ -43,7 +43,8 @@ fun LoginScreen(modifier: Modifier = Modifier) {
     Scaffold { innerPadding ->
         Column(modifier=modifier
             .padding(innerPadding)
-            .fillMaxSize(),
+            .fillMaxSize()
+            .padding(horizontal = 16.dp),
             verticalArrangement = Arrangement.Center, // Arrange children vertically in the center
             horizontalAlignment = Alignment.CenterHorizontally // Align children horizontally in the center
         ) {
@@ -54,6 +55,7 @@ fun LoginScreen(modifier: Modifier = Modifier) {
             Spacer(modifier=Modifier.padding(8.dp))
 
             OutlinedTextField(
+                modifier = Modifier.fillMaxWidth(),
                 value = loginUiState.username,
                 onValueChange = {
                     loginViewModel.onUsernameChange(it)
@@ -62,6 +64,7 @@ fun LoginScreen(modifier: Modifier = Modifier) {
             )
             Spacer(modifier=Modifier.padding(4.dp))
             OutlinedTextField(
+                modifier = Modifier.fillMaxWidth(),
                 value = loginUiState.password,
                 onValueChange = {
                     loginViewModel.onPasswordChange(it)
@@ -71,7 +74,7 @@ fun LoginScreen(modifier: Modifier = Modifier) {
             )
             Spacer(modifier=Modifier.padding(8.dp))
             Button(
-                modifier = modifier,
+                modifier = Modifier.fillMaxWidth(),
                 onClick = {
                     loginViewModel.login()
                 },
