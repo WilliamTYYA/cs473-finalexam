@@ -69,8 +69,7 @@ fun ItemListScreen(modifier: Modifier = Modifier, category: Category) {
 
     val itemEditorViewModel: ItemEditorViewModel = viewModel {
         ItemEditorViewModel(
-            ItemRepositoryImpl(itemDao),
-            category
+            ItemRepositoryImpl(itemDao)
         )
     }
     val itemEditorUiState by itemEditorViewModel.itemEditorUiState.collectAsStateWithLifecycle()
@@ -136,6 +135,7 @@ fun ItemListScreen(modifier: Modifier = Modifier, category: Category) {
     }
 
     if (addDialog.value) {
+        itemEditorViewModel.updateItemCategory(category.toString())
         AddDialog(
             onDismissRequest = { addDialog.value = false },
             itemEditorUiState = itemEditorUiState,
@@ -167,7 +167,7 @@ fun ItemListScreen(modifier: Modifier = Modifier, category: Category) {
                     )
 
                     OutlinedTextField(
-                        value = category.toString(),
+                        value = itemEditorUiState.category,
                         onValueChange = {
                             itemEditorViewModel.updateItemCategory(it)
                         },

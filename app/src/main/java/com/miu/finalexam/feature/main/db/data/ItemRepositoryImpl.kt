@@ -1,5 +1,6 @@
 package com.miu.finalexam.feature.main.db.data
 
+import android.util.Log
 import com.miu.finalexam.database.dao.ItemDao
 import com.miu.finalexam.database.entity.Item
 import com.miu.finalexam.feature.main.db.domain.ItemRepository
@@ -31,6 +32,9 @@ class ItemRepositoryImpl(
 
     override fun getItem(id: Int): Flow<Item> = itemDao.getItem(id)
 
-    override fun getItems(category: String): Flow<List<Item>> = itemDao.getItems(category)
+    override fun getItems(category: String): Flow<List<Item>> {
+        Log.i("getItems by Category", category)
+        return itemDao.getItems(category)
+    }
 
 }

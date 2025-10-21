@@ -16,8 +16,7 @@ import kotlinx.coroutines.withContext
 import kotlin.math.log
 
 class ItemEditorViewModel(
-    private val itemRepository: ItemRepository,
-    category: Category,
+    private val itemRepository: ItemRepository
 ): ViewModel() {
     private val _ItemEditorUiState = MutableStateFlow(ItemEditorUiState.Empty)
     val itemEditorUiState = _ItemEditorUiState.asStateFlow()
@@ -32,6 +31,7 @@ class ItemEditorViewModel(
         _ItemEditorUiState.update {
             it.copy(category = category)
         }
+        Log.i("updateItemCategory", _ItemEditorUiState.value.category)
     }
 
     fun updateItemPrice(price: String) {
