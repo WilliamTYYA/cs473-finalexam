@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    id("com.google.devtools.ksp")
     kotlin("plugin.serialization") version "2.2.20"
 }
 
@@ -48,6 +49,12 @@ android {
 }
 
 dependencies {
+    implementation("androidx.room:room-runtime:2.8.2")
+    implementation("androidx.room:room-ktx:2.8.2")
+    ksp("androidx.room:room-compiler:2.8.2")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.9.4")
+    implementation("androidx.compose.material:material-icons-extended-android:1.7.8")
+
     implementation("androidx.navigation3:navigation3-runtime:1.0.0-alpha10")
     implementation("androidx.navigation3:navigation3-ui-android:1.0.0-alpha10")
     implementation("androidx.lifecycle:lifecycle-viewmodel-navigation3:2.10.0-alpha04")

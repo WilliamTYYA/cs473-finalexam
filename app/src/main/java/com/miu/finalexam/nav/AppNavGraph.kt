@@ -21,6 +21,7 @@ import androidx.navigation3.ui.NavDisplay
 import com.miu.finalexam.feature.main.data.Category
 import com.miu.finalexam.feature.main.data.Setting
 import com.miu.finalexam.feature.main.ui.screen.home.HomeScreen
+import com.miu.finalexam.feature.main.ui.screen.itemlist.screen.ItemListScreen
 import com.miu.finalexam.feature.main.ui.screen.productdetail.ProductDetailScreen
 import com.miu.finalexam.feature.main.ui.screen.productlist.ProductListScreen
 import com.miu.finalexam.feature.main.ui.screen.setting.SettingsScreen
@@ -105,19 +106,23 @@ fun AppNavGraph(modifier: Modifier = Modifier) {
                 }
                 entry<ProductList> { productList: ProductList ->
                     val category: Category = productList.category
-                    ProductListScreen(
-                        category = category,
-                        navigateToProductDetail = ::navigateToProductDetail,
-                        modifier = modifier
+//                    ProductListScreen(
+//                        category = category,
+//                        navigateToProductDetail = ::navigateToProductDetail,
+//                        modifier = modifier
+//                    )
+                    ItemListScreen(
+                        modifier = modifier,
+                        category = category
                     )
                 }
-                entry<ProductDetail> { productDetail: ProductDetail ->
-                    var id: String = productDetail.productId
-                    ProductDetailScreen(
-                        id,
-                        modifier
-                    )
-                }
+//                entry<ProductDetail> { productDetail: ProductDetail ->
+//                    var id: String = productDetail.productId
+//                    ProductDetailScreen(
+//                        id,
+//                        modifier
+//                    )
+//                }
                 entry<Settings> {
                     SettingsScreen(modifier)
                 }
